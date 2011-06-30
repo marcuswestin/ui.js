@@ -53,7 +53,7 @@ NODES.NODE = Class(function() {
       node.appendChild(arg.render(doc))
     } else if (typeof arg == 'string') {
       node.appendChild(doc.createTextNode(arg))
-    } else if (arg instanceof HTMLElement) {
+    } else if (arg.nodeType && arg.nodeType == 1) { // http://stackoverflow.com/questions/120262/whats-the-best-way-to-detect-if-a-given-javascript-object-is-a-dom-element
       node.appendChild(arg)
     } else {
       each(arg, function(val, key) {

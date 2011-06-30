@@ -6,7 +6,7 @@ module.exports = function(element, styleProps) {
     if (typeof val == 'number') { val = val + 'px' }
     else if (key == 'float') { key = 'cssFloat' }
     else if (module.exports.prefixed[key]) { key = module.exports.prefix + key }
-    style[key] = val
+    if (val != null) { style[key] = val } // catches null and undefined
   })
   return element
 }
