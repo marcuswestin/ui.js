@@ -1,8 +1,8 @@
 var Class = require('std/Class')
   , each = require('std/each')
   , slice = require('std/slice')
-  , style = require('std/dom/style')
   , isArguments = require('std/isArguments')
+  , style = require('./style')
 
 var NODES = module.exports
 

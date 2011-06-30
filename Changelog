@@ -1,2 +1,5 @@
+intended v0.1.1
++ Add dom.exposeGlobals()
+
 v0.1.0
 + implement ui.dom

@@ -10,5 +10,10 @@ module.exports = {
 	getWindowScroll: require('./getWindowScroll'),
 	getWindowSize: require('./getWindowSize'),
 	
-	Component: require('./Component')
+	Component: require('./Component'),
+	
+	NODES: require('./NODES'),
+	exposeGlobals: function() {
+		module.exports.NODES.exposeGlobals()
+	}
 }
