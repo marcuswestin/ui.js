@@ -97,7 +97,7 @@ NODES.FRAGMENT = Class(NODES.NODE, function() {
 })
 
 NODES.DIV = Class(NODES.NODE, function() { this._tag = 'div' })
-NODES.SPAN = Class(NODES.NODE, function() { this._tag = 'div' })
+NODES.SPAN = Class(NODES.NODE, function() { this._tag = 'span' })
 NODES.IMG = Class(NODES.NODE, function() { this._tag = 'img' })
 NODES.A = Class(NODES.NODE, function() { this._tag = 'a' })
 
