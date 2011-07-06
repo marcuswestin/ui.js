@@ -100,6 +100,11 @@ NODES.DIV = Class(NODES.NODE, function() { this._tag = 'div' })
 NODES.SPAN = Class(NODES.NODE, function() { this._tag = 'span' })
 NODES.IMG = Class(NODES.NODE, function() { this._tag = 'img' })
 NODES.A = Class(NODES.NODE, function() { this._tag = 'a' })
+NODES.P = Class(NODES.NODE, function() { this._tag = 'p' })
+NODES.H1 = Class(NODES.NODE, function() { this._tag = 'h1' })
+NODES.H2 = Class(NODES.NODE, function() { this._tag = 'h2' })
+NODES.H3 = Class(NODES.NODE, function() { this._tag = 'h3' })
+NODES.H4 = Class(NODES.NODE, function() { this._tag = 'h4' })
 
 NODES.exposeGlobals = function() {
   TEXT = function() { return new NODES.TEXT(arguments) }
@@ -108,4 +113,9 @@ NODES.exposeGlobals = function() {
   SPAN = function() { return new NODES.SPAN(arguments) }
   IMG = function() { return new NODES.IMG(arguments) }
   A = function() { return new NODES.A(arguments) }
+  P = function() { return new NODES.P(arguments) }
+  H1 = function() { return new NODES.H1(arguments) }
+  H2 = function() { return new NODES.H2(arguments) }
+  H3 = function() { return new NODES.H3(arguments) }
+  H4 = function() { return new NODES.H4(arguments) }
 }
