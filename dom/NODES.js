@@ -3,41 +3,27 @@ var Class = require('std/Class')
   , slice = require('std/slice')
   , isArguments = require('std/isArguments')
   , style = require('./style')
+  , Component = require('./Component')
+  , isArray = require('std/isArray')
 
 var NODES = module.exports
 
-NODES.NODE = Class(function() {
-
-  this._tag = null
+NODES.NODE = Class(Component, function() {
 
   this.init = function(args) {
+    // No need to call Component.init - Nodes are not expected to publish
     this._args = args
   }
 
-  this.render = function(doc) {
-    if (this._doc == doc) { return this._el }
-    if (this._el) { this.unrender() }
-
-    this._doc = doc
-    this._el = doc.createElement(this._tag)
-
+  this.renderContent = function() {
     var args = this._args
-      , node = this._el
     if (typeof args[0] == 'string') {
-      node.className = args[0]
+      this._el.className = args[0]
       this._processArgs(args, 1)
     } else {
       this._processArgs(args, 0)
     }
-
-    return this._el
   }
-
-  this.getDocument = function() { return this._doc }
-  this.getElement = function() { return this._el }
-  
-  this.style = function(styles) { style(this._el, styles); return this }
-  this.opacity = function(opacity) { style.opacity(this._el, opacity); return this }
 
   this._processArgs = function(args, index) {
     while (index < args.length) {
@@ -49,12 +35,14 @@ NODES.NODE = Class(function() {
     if (!arg) { return }
     var node = this._el
       , doc = this._doc
-    if (typeof arg.render == 'function') {
-      node.appendChild(arg.render(doc))
+    if (typeof arg._render == 'function') {
+      node.appendChild(arg._render(doc))
     } else if (typeof arg == 'string') {
       node.appendChild(doc.createTextNode(arg))
     } else if (arg.nodeType && arg.nodeType == 1) { // http://stackoverflow.com/questions/120262/whats-the-best-way-to-detect-if-a-given-javascript-object-is-a-dom-element
       node.appendChild(arg)
+    } else if (isArray(arg)) {
+      this._processArgs(arg, 0)
     } else {
       each(arg, function(val, key) {
         if (key == 'style') { style(node, val) }
@@ -70,12 +58,6 @@ NODES.NODE = Class(function() {
       if (isArguments(this._args)) { this._args = slice(this._args) } // We delay the call to slice, since it may not be neccesary
       this._args = this._args.concat(slice(arguments))
     }
-    return this
-  }
-
-  this.appendTo = function(node) {
-    var el = (node.getElement ? node.getElement() : node)
-    el.appendChild(this.render(node.ownerDocument || node.getDocument()))
     return this
   }
 })
