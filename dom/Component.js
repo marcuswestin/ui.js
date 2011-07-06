@@ -16,7 +16,7 @@ module.exports = Class(Publisher, function() {
 	}
 
 	this.render = function(component) {
-		this._rendercomponent
+		this._render(component)
 		return this
 	}
 

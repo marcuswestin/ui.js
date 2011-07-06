@@ -63,7 +63,7 @@ NODES.NODE = Class(Component, function() {
 })
 
 NODES.TEXT = Class(NODES.NODE, function() {
-  this.render = function(doc) {
+  this._render = function(doc) {
     var args = this._args
       , text = args.length > 1 ? slice(args).join(' ') : args[0]
     return doc.createTextNode(text)
