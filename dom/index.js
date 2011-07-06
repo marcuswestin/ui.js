@@ -4,6 +4,7 @@ module.exports = {
 
 	on: require('./on'),
 	off: require('./off'),
+	waitForImage: require('./waitForImage'),
 
 	getOffset: require('./getOffset'),
 	getDocumentHeight: require('./getDocumentHeight'),
