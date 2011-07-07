@@ -16,8 +16,8 @@ module.exports = function getOffset(elem, win) {
 		var box = elem.getBoundingClientRect(), doc = elem.ownerDocument, body = doc.body, docElem = doc.documentElement,
 			clientTop = docElem.clientTop || body.clientTop || 0, clientLeft = docElem.clientLeft || body.clientLeft || 0,
 			scroll = getWindowScroll(win),
-			top  = box.top  + scroll.y - clientTop,
-			left = box.left + scroll.x - clientLeft;
+			top  = box.top  + scroll.top - clientTop,
+			left = box.left + scroll.left - clientLeft;
 		return { top:top, left:left, width:box.right - box.left, height:box.bottom - box.top };
 
 	} else {
