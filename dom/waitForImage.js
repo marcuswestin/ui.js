@@ -1,7 +1,7 @@
 var on = require('./on'),
   recall = require('std/recall')
 
-module.exports = function onImageLoaded(img, callback) {
+module.exports = function waitForImage(img, callback) {
   if (!img || img.tagName != 'IMG') { return }
   // IE supports readyState - others support complete
   var hasReadyState = ('readyState' in img),
