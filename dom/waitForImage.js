@@ -7,7 +7,10 @@ module.exports = function onImageLoaded(img, callback) {
   var hasReadyState = ('readyState' in img),
   imageIsLoading = (hasReadyState ? (img.readyState != 'complete') : ('complete' in img && img.complete != true))
   if (imageIsLoading) {
-    on(img, hasReadyState ? 'readystatechange' : 'load', recall(this, arguments))
+    if (!img.getAttribute('__loadingAttached__')) {
+      img.setAttribute('__loadingAttached__', true)
+      on(img, hasReadyState ? 'readystatechange' : 'load', recall(this, arguments))
+    }
     return
   }
   callback()
