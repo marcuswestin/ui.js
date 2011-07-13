@@ -42,10 +42,10 @@ module.exports = Class(Publisher, function() {
 		this._getElementOf(node).appendChild(this._render(node))
 		return this
 	}
-  
-  this.on = function(eventName, handler) { return on(this._el, eventName, handler) }
-  this.off = function(eventName, handler) { return off(this._el, eventName, handler) }
-  
+
+	this.on = function(eventName, handler) { return on(this._el, eventName, handler) }
+	this.off = function(eventName, handler) { return off(this._el, eventName, handler) }
+
 	this.style = function(styles) { style(this._el, styles); return this }
 	this.opacity = function(opacity) { style.opacity(this._el, opacity); return this }
 
