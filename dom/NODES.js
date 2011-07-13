@@ -4,7 +4,9 @@ var Class = require('std/Class')
   , isArguments = require('std/isArguments')
   , style = require('./style')
   , Component = require('./Component')
-  , isArray = require('std/isArray')
+  , isArray = require('std/isArray'),
+	arrayToObject = require('std/arrayToObject'),
+	curry = require('std/curry')
 
 var NODES = module.exports
 
@@ -13,6 +15,18 @@ NODES.NODE = Class(Component, function() {
   this.init = function(args) {
     // No need to call Component.init - Nodes are not expected to publish
     this._args = args
+  }
+
+  this.attributeHandlers = {
+    click: curry(this.on, 'click'),
+    mousedown: curry(this.on, 'mousedown'),
+    mouseup: curry(this.on, 'mouseup'),
+    mouseover: curry(this.on, 'mouseover'),
+    mosueout: curry(this.on, 'mosueout'),
+    keypress: curry(this.on, 'keypress'),
+    keydown: curry(this.on, 'keydown'),
+    keyup: curry(this.on, 'keyup'),
+    style: this.style
   }
 
   this.renderContent = function() {
@@ -44,9 +58,12 @@ NODES.NODE = Class(Component, function() {
     } else if (isArray(arg)) {
       this._processArgs(arg, 0)
     } else {
-      each(arg, function(val, key) {
-        if (key == 'style') { style(node, val) }
-        else { node[key] = val }
+      each(arg, this, function(val, key) {
+        if (this.attributeHandlers[key]) {
+          this.attributeHandlers[key].call(this, val)
+        } else {
+          node[key] = val
+        }
       })
     }
   }
@@ -78,26 +95,23 @@ NODES.FRAGMENT = Class(NODES.NODE, function() {
   }
 })
 
-NODES.DIV = Class(NODES.NODE, function() { this._tag = 'div' })
-NODES.SPAN = Class(NODES.NODE, function() { this._tag = 'span' })
-NODES.IMG = Class(NODES.NODE, function() { this._tag = 'img' })
-NODES.A = Class(NODES.NODE, function() { this._tag = 'a' })
-NODES.P = Class(NODES.NODE, function() { this._tag = 'p' })
-NODES.H1 = Class(NODES.NODE, function() { this._tag = 'h1' })
-NODES.H2 = Class(NODES.NODE, function() { this._tag = 'h2' })
-NODES.H3 = Class(NODES.NODE, function() { this._tag = 'h3' })
-NODES.H4 = Class(NODES.NODE, function() { this._tag = 'h4' })
+NODES.attributeHandlers = NODES.NODE.prototype.attributeHandlers
+
+NODES.createGenerator = function(tag) {
+  var ClassDefinition = Class(NODES.NODE, function() { this._tag = tag })
+  return function() { return new ClassDefinition(arguments) }
+}
 
 NODES.exposeGlobals = function() {
   TEXT = function() { return new NODES.TEXT(arguments) }
   FRAGMENT = function() { return new NODES.FRAGMENT(arguments) }
-  DIV = function() { return new NODES.DIV(arguments) }
-  SPAN = function() { return new NODES.SPAN(arguments) }
-  IMG = function() { return new NODES.IMG(arguments) }
-  A = function() { return new NODES.A(arguments) }
-  P = function() { return new NODES.P(arguments) }
-  H1 = function() { return new NODES.H1(arguments) }
-  H2 = function() { return new NODES.H2(arguments) }
-  H3 = function() { return new NODES.H3(arguments) }
-  H4 = function() { return new NODES.H4(arguments) }
+  DIV = NODES.createGenerator('div')
+  SPAN = NODES.createGenerator('span')
+  IMG = NODES.createGenerator('img')
+  A = NODES.createGenerator('a')
+  P = NODES.createGenerator('p')
+  H1 = NODES.createGenerator('h1')
+  H2 = NODES.createGenerator('h2')
+  H3 = NODES.createGenerator('h3')
+  H4 = NODES.createGenerator('h4')
 }
