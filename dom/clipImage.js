@@ -4,7 +4,7 @@ var style = require('./style'),
   waitForImage = require('./waitForImage'),
   getElementOf = require('./getElementOf')
 
-module.exports = function clipImage(img, size) {
+module.exports = function clipImage(img, clipWidth, clipHeight) {
   img = getElementOf(img)
   var doc = getDocumentOf(img)
   var clipper = doc.createElement('div')
@@ -16,19 +16,19 @@ module.exports = function clipImage(img, size) {
       height = img.offsetHeight,
       newSize
 
-    if (width <= size && height <= size) {
+    if (width <= clipWidth && height <= clipHeight) {
       newSize = { width:width, height:height }
     } else if (width < height) {
-      newSize = { width:size, height:Math.round(height * (size / width)) }
+      newSize = { width:clipWidth, height:Math.round(height * (clipWidth / width)) }
     } else {
-      newSize = { width:Math.round(width * (size / height)), height:size }
+      newSize = { width:Math.round(width * (clipHeight / height)), height:height }
     }
 
     style(img, {
-      width:newSize.width, marginLeft:Math.floor(size/2 - newSize.width/2),
-      height:newSize.height, marginTop:Math.floor(size/2 - newSize.height/2) })
+      width:newSize.width, marginLeft:Math.floor(clipWidth/2 - newSize.width/2),
+      height:newSize.height, marginTop:Math.floor(clipHeight/2 - newSize.height/2) })
     
-    style(clipper, { width:size, height:size })
+    style(clipper, { width:clipWidth, height:clipHeight })
   })
   return clipper
 }
