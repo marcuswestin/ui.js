@@ -5,6 +5,8 @@ var Class = require('std/Class')
 	, getOffset = require('./getOffset')
 	, on = require('./on')
 	, off = require('./off')
+	, addClass = require('./addClass')
+	, removeClass = require('./removeClass')
 
 module.exports = Class(Publisher, function() {
 
@@ -46,6 +48,8 @@ module.exports = Class(Publisher, function() {
   this.on = function(eventName, handler) { return on(this._el, eventName, handler) }
   this.off = function(eventName, handler) { return off(this._el, eventName, handler) }
   
+  this.addClass = function(className) { addClass(this._el, className); return this }
+  this.removeClass = function(className) { removeClass(this._el, className); return this }
 	this.style = function(styles) { style(this._el, styles); return this }
 	this.opacity = function(opacity) { style.opacity(this._el, opacity); return this }
 

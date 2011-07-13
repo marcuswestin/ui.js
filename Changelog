@@ -1,6 +1,7 @@
 intended v0.1.1
 + Add dom.exposeGlobals()
 + Add a bunch more tags - P, H1-H4
++ implement addClass and removeClass
 + implement dom.waitForImage
 
 v0.1.0
