@@ -36,3 +36,19 @@ module.exports.opacity = function(el, fraction) {
   }
   module.exports.opacity(el, fraction)
 }
+
+module.exports.gradient = function(el, fromColor, toColor) {
+  var key = 'background',
+    val
+  if (client.isIE && client.version <= 8) {
+    key = 'filter'
+    val = "progid:DXImageTransform.Microsoft.gradient(startColorstr='"+fromColor+"', endColorstr='"+toColor+"')"
+  } else if (client.isFirefox) {
+    val = '-moz-linear-gradient(top, '+fromColor+', '+toColor+')'
+  } else if (client.isWebkit) {
+    val = '-webkit-gradient(linear, left top, left bottom, from('+fromColor+'), to('+toColor+'))'
+  } else {
+    val = fromColor
+  }
+  el.style[key] = val
+}
