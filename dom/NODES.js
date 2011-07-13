@@ -22,7 +22,7 @@ NODES.NODE = Class(Component, function() {
     mousedown: curry(this.on, 'mousedown'),
     mouseup: curry(this.on, 'mouseup'),
     mouseover: curry(this.on, 'mouseover'),
-    mosueout: curry(this.on, 'mosueout'),
+    mouseout: curry(this.on, 'mouseout'),
     keypress: curry(this.on, 'keypress'),
     keydown: curry(this.on, 'keydown'),
     keyup: curry(this.on, 'keyup'),
