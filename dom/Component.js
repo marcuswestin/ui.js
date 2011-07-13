@@ -7,6 +7,8 @@ var Class = require('std/Class')
 	, off = require('./off')
 	, addClass = require('./addClass')
 	, removeClass = require('./removeClass')
+	, getDocumentOf = require('./getDocumentOf')
+	, getElementOf = require('./getElementOf')
 
 module.exports = Class(Publisher, function() {
 
@@ -23,7 +25,7 @@ module.exports = Class(Publisher, function() {
 	}
 
 	this._render = function(component) {
-		var doc = this._getDocumentOf(component)
+		var doc = getDocumentOf(component)
 		if (this._doc == doc) { return this._el }
 		if (this._el) { this.unrender() }
 
@@ -41,7 +43,7 @@ module.exports = Class(Publisher, function() {
 
 	this.append = function(element) { return this._el.appendChild(element) }
 	this.appendTo = function(node) {
-		this._getElementOf(node).appendChild(this._render(node))
+		getElementOf(node).appendChild(this._render(node))
 		return this
 	}
 
@@ -56,16 +58,5 @@ module.exports = Class(Publisher, function() {
 
 	this.getOffset = function() { return getOffset(this._el) }
 
-	this._getDocumentOf = function(component) {
-		if (component.getDocument) { return component.getDocument() }
-		else if (component.ownerDocument) { return component.ownerDocument }
-		else { return component }
-	}
-
-	this._getElementOf = function(component) {
-		if (component.getElement) { return component.getElement() }
-		else { return component }
-	}
-	
 	this.remove = function() { this._el.parentNode.removeChild(this._el) }
 })
