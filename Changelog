@@ -7,6 +7,7 @@ intended v0.1.1
 + create NODE class generators, such that you can define your own NODEs, e.g. BUTTON = NODES.createGenerator('button')
 + make attribute handling extensible, such that you can define your own attribute handlers, e.g. DIV({ data:dataObject })
 + implement style.gradient
++ implement dom.clipImage
 
 v0.1.0
 + implement ui.dom
