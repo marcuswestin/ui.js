@@ -3,6 +3,7 @@ intended v0.1.1
 + Add a bunch more tags - P, H1-H4
 + implement dom.waitForImage
 + implement Component#remove
++ create NODE class generators, such that you can define your own NODEs, e.g. BUTTON = NODES.createGenerator('button')
 
 v0.1.0
 + implement ui.dom

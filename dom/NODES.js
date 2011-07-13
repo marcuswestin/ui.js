@@ -82,26 +82,21 @@ NODES.FRAGMENT = Class(NODES.NODE, function() {
   }
 })
 
-NODES.DIV = Class(NODES.NODE, function() { this._tag = 'div' })
-NODES.SPAN = Class(NODES.NODE, function() { this._tag = 'span' })
-NODES.IMG = Class(NODES.NODE, function() { this._tag = 'img' })
-NODES.A = Class(NODES.NODE, function() { this._tag = 'a' })
-NODES.P = Class(NODES.NODE, function() { this._tag = 'p' })
-NODES.H1 = Class(NODES.NODE, function() { this._tag = 'h1' })
-NODES.H2 = Class(NODES.NODE, function() { this._tag = 'h2' })
-NODES.H3 = Class(NODES.NODE, function() { this._tag = 'h3' })
-NODES.H4 = Class(NODES.NODE, function() { this._tag = 'h4' })
+NODES.createGenerator = function(tag) {
+  var ClassDefinition = Class(NODES.NODE, function() { this._tag = tag })
+  return function() { return new ClassDefinition(arguments) }
+}
 
 NODES.exposeGlobals = function() {
   TEXT = function() { return new NODES.TEXT(arguments) }
   FRAGMENT = function() { return new NODES.FRAGMENT(arguments) }
-  DIV = function() { return new NODES.DIV(arguments) }
-  SPAN = function() { return new NODES.SPAN(arguments) }
-  IMG = function() { return new NODES.IMG(arguments) }
-  A = function() { return new NODES.A(arguments) }
-  P = function() { return new NODES.P(arguments) }
-  H1 = function() { return new NODES.H1(arguments) }
-  H2 = function() { return new NODES.H2(arguments) }
-  H3 = function() { return new NODES.H3(arguments) }
-  H4 = function() { return new NODES.H4(arguments) }
+  DIV = NODES.createGenerator('div')
+  SPAN = NODES.createGenerator('span')
+  IMG = NODES.createGenerator('img')
+  A = NODES.createGenerator('a')
+  P = NODES.createGenerator('p')
+  H1 = NODES.createGenerator('h1')
+  H2 = NODES.createGenerator('h2')
+  H3 = NODES.createGenerator('h3')
+  H4 = NODES.createGenerator('h4')
 }
