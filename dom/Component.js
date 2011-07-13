@@ -61,4 +61,6 @@ module.exports = Class(Publisher, function() {
 		if (component.getElement) { return component.getElement() }
 		else { return component }
 	}
+	
+	this.remove = function() { this._el.parentNode.removeChild(this._el) }
 })
