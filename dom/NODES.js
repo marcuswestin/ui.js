@@ -4,7 +4,8 @@ var Class = require('std/Class')
   , isArguments = require('std/isArguments')
   , style = require('./style')
   , Component = require('./Component')
-  , isArray = require('std/isArray')
+  , isArray = require('std/isArray'),
+	arrayToObject = require('std/arrayToObject')
 
 var NODES = module.exports
 
@@ -14,6 +15,8 @@ NODES.NODE = Class(Component, function() {
     // No need to call Component.init - Nodes are not expected to publish
     this._args = args
   }
+
+  this._handlers = arrayToObject(['click', 'mouseover', 'mouseout', 'keypress', 'keyup', 'keydown'])
 
   this.renderContent = function() {
     var args = this._args
@@ -44,8 +47,9 @@ NODES.NODE = Class(Component, function() {
     } else if (isArray(arg)) {
       this._processArgs(arg, 0)
     } else {
-      each(arg, function(val, key) {
+      each(arg, this, function(val, key) {
         if (key == 'style') { style(node, val) }
+        else if (key in this._handlers) { this.on(key, val) }
         else { node[key] = val }
       })
     }
