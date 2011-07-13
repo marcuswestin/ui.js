@@ -5,7 +5,8 @@ var Class = require('std/Class')
   , style = require('./style')
   , Component = require('./Component')
   , isArray = require('std/isArray'),
-	arrayToObject = require('std/arrayToObject')
+	arrayToObject = require('std/arrayToObject'),
+	curry = require('std/curry')
 
 var NODES = module.exports
 
@@ -16,7 +17,17 @@ NODES.NODE = Class(Component, function() {
     this._args = args
   }
 
-  this._handlers = arrayToObject(['click', 'mouseover', 'mouseout', 'keypress', 'keyup', 'keydown'])
+  this.attributeHandlers = {
+    click: curry(this.on, 'click'),
+    mousedown: curry(this.on, 'mousedown'),
+    mouseup: curry(this.on, 'mouseup'),
+    mouseover: curry(this.on, 'mouseover'),
+    mosueout: curry(this.on, 'mosueout'),
+    keypress: curry(this.on, 'keypress'),
+    keydown: curry(this.on, 'keydown'),
+    keyup: curry(this.on, 'keyup'),
+    style: this.style
+  }
 
   this.renderContent = function() {
     var args = this._args
@@ -48,9 +59,11 @@ NODES.NODE = Class(Component, function() {
       this._processArgs(arg, 0)
     } else {
       each(arg, this, function(val, key) {
-        if (key == 'style') { style(node, val) }
-        else if (key in this._handlers) { this.on(key, val) }
-        else { node[key] = val }
+        if (this.attributeHandlers[key]) {
+          this.attributeHandlers[key].call(this, val)
+        } else {
+          node[key] = val
+        }
       })
     }
   }
@@ -81,6 +94,8 @@ NODES.FRAGMENT = Class(NODES.NODE, function() {
     return this._el
   }
 })
+
+NODES.attributeHandlers = NODES.NODE.prototype.attributeHandlers
 
 NODES.createGenerator = function(tag) {
   var ClassDefinition = Class(NODES.NODE, function() { this._tag = tag })
