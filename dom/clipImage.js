@@ -21,7 +21,7 @@ module.exports = function clipImage(img, clipWidth, clipHeight) {
     } else if (width < height) {
       newSize = { width:clipWidth, height:Math.round(height * (clipWidth / width)) }
     } else {
-      newSize = { width:Math.round(width * (clipHeight / height)), height:height }
+      newSize = { width:Math.round(width * (clipHeight / height)), height:clipHeight }
     }
 
     style(img, {
