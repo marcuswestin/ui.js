@@ -1,4 +1,5 @@
-var client = require('std/client')
+var client = require('std/client'),
+  each = require('std/each')
 
 module.exports = function(element, styleProps) {
   var style = element.style
