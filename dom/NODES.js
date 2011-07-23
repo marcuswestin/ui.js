@@ -26,6 +26,7 @@ NODES.NODE = Class(Component, function() {
     keypress: curry(this.on, 'keypress'),
     keydown: curry(this.on, 'keydown'),
     keyup: curry(this.on, 'keyup'),
+    blur: curry(this.on, 'blur'),
     style: this.style
   }
 
@@ -115,4 +116,6 @@ NODES.exposeGlobals = function() {
   H3 = NODES.createGenerator('h3')
   H4 = NODES.createGenerator('h4')
   BUTTON = NODES.createGenerator('button')
+  INPUT = NODES.createGenerator('input', { type:'text' })
+  PASSWORD = NODES.createGenerator('input', { type:'password' })
 }
