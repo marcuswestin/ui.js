@@ -118,4 +118,5 @@ NODES.exposeGlobals = function() {
   BUTTON = NODES.createGenerator('button')
   INPUT = NODES.createGenerator('input', { type:'text' })
   PASSWORD = NODES.createGenerator('input', { type:'password' })
+  TEXTAREA = NODES.createGenerator('textarea')
 }
