@@ -114,4 +114,5 @@ NODES.exposeGlobals = function() {
   H2 = NODES.createGenerator('h2')
   H3 = NODES.createGenerator('h3')
   H4 = NODES.createGenerator('h4')
+  INPUT = NODES.createGenerator('input')
 }
