@@ -52,7 +52,7 @@ NODES.NODE = Class(Component, function() {
       , doc = this._doc
     if (typeof arg._render == 'function') {
       node.appendChild(arg._render(doc))
-    } else if (typeof arg == 'string') {
+    } else if (typeof arg == 'string' || typeof arg == 'number') {
       node.appendChild(doc.createTextNode(arg))
     } else if (arg.nodeType && arg.nodeType == 1) { // http://stackoverflow.com/questions/120262/whats-the-best-way-to-detect-if-a-given-javascript-object-is-a-dom-element
       node.appendChild(arg)
