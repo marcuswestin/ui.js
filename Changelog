@@ -8,6 +8,7 @@ intended v0.1.1
 + make attribute handling extensible, such that you can define your own attribute handlers, e.g. DIV({ data:dataObject })
 + implement style.gradient
 + implement dom.clipImage
++ implement dom.getViewportSize
 
 v0.1.0
 + implement ui.dom
