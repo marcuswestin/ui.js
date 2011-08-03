@@ -115,4 +115,5 @@ NODES.exposeGlobals = function() {
   H3 = NODES.createGenerator('h3')
   H4 = NODES.createGenerator('h4')
   INPUT = NODES.createGenerator('input')
+  IFRAME = NODES.createGenerator('iframe')
 }
