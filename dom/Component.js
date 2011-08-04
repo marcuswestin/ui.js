@@ -9,6 +9,7 @@ var Class = require('std/Class')
 	, removeClass = require('./removeClass')
 	, getDocumentOf = require('./getDocumentOf')
 	, getElementOf = require('./getElementOf')
+	, getWindowOf = require('./getWindowOf')
 
 module.exports = Class(Publisher, function() {
 
@@ -38,6 +39,7 @@ module.exports = Class(Publisher, function() {
 
 	this.getElement = function() { return this._el }
 	this.getDocument = function() { return this._doc }
+	this.getWindow = function() { return getWindowOf(this._doc) }
 
 	this.create = function(tag, properties) { return create(tag, properties, this._doc) }
 

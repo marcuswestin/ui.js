@@ -9,6 +9,7 @@ intended v0.1.1
 + implement style.gradient
 + implement dom.clipImage
 + implement dom.getViewportSize
++ implement dom.getWindowOf
 
 v0.1.0
 + implement ui.dom
