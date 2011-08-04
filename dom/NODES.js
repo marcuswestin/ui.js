@@ -91,6 +91,16 @@ NODES.TEXT = Class(NODES.NODE, function() {
   }
 })
 
+NODES.HTML = Class(NODES.NODE, function() {
+  this._render = function(doc) {
+    var args = this._args
+      , html = args.length > 1 ? slice(args).join(' ') : args[0]
+      , fragment = doc.createElement('span')
+    fragment.innerHTML = html
+    return fragment
+  }
+})
+
 NODES.FRAGMENT = Class(NODES.NODE, function() {
   this.render = function(doc) {
     this._el = doc.createDocumentFragment()
@@ -109,6 +119,7 @@ NODES.createGenerator = function(tag) {
 NODES.exposeGlobals = function() {
   TEXT = function() { return new NODES.TEXT(arguments) }
   FRAGMENT = function() { return new NODES.FRAGMENT(arguments) }
+  HTML = function() { return new NODES.HTML(arguments) }
   DIV = NODES.createGenerator('div')
   SPAN = NODES.createGenerator('span')
   IMG = NODES.createGenerator('img')
