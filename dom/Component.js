@@ -49,6 +49,9 @@ module.exports = Class(Publisher, function() {
 		return this
 	}
 
+	this.hide = function() { this._el.style.display = 'none'; return this }
+	this.show = function() { this._el.style.display = 'block'; return this }
+	
 	this.on = function(eventName, handler) { return on(this._el, eventName, handler) }
 	this.off = function(eventName, handler) { return off(this._el, eventName, handler) }
 
@@ -59,6 +62,8 @@ module.exports = Class(Publisher, function() {
 	this.opacity = function(opacity) { style.opacity(this._el, opacity); return this }
 
 	this.getOffset = function() { return getOffset(this._el) }
+	this.getWidth = function() { return this._el.offsetWidth }
+	this.getHeight = function() { return this._el.offsetHeight }
 
 	this.remove = function() { this._el.parentNode.removeChild(this._el) }
 })

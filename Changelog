@@ -10,6 +10,7 @@ intended v0.1.1
 + implement dom.clipImage
 + implement dom.getViewportSize
 + implement dom.getWindowOf
++ Add getWidth, getHeight, hide and show to dom.Component
 
 v0.1.0
 + implement ui.dom
