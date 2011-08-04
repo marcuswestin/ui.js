@@ -29,6 +29,8 @@ NODES.NODE = Class(Component, function() {
     blur: curry(this.on, 'blur'),
     style: this.style
   }
+  
+  this._attributeAttributes = { 'for':1 }
 
   this.renderContent = function() {
     var args = this._args
@@ -63,7 +65,8 @@ NODES.NODE = Class(Component, function() {
         if (this.attributeHandlers[key]) {
           this.attributeHandlers[key].call(this, val)
         } else {
-          node[key] = val
+          if (this._attributeAttributes[key]) { node.setAttribute(key, val) }
+          else { node[key] = val }
         }
       })
     }
