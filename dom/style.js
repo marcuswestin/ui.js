@@ -5,20 +5,20 @@ module.exports = function(element, styleProps) {
   var style = element.style
   each(styleProps, function(val, key) {
     if (typeof val == 'number') { val = val + 'px' }
-    else if (key == 'float') { key = 'cssFloat' }
-    else if (module.exports.prefixed[key]) { key = module.exports.prefix + key }
+    if (key == 'float') { key = 'cssFloat' }
+    if (module.exports.prefixed[key]) { key = module.exports.prefix + key }
     if (val != null) { style[key] = val } // catches null and undefined
   })
   return element
 }
 
 module.exports.prefix = 
-  client.isFirefox ? '-moz-' :
+  client.isFirefox ? (client.version < 5 ? '-moz-' : '') :
   client.isWebKit ? '-webkit-' :
-  null
+  ''
 
 module.exports.prefixed = {
-  // 'boxShadow':true,
+  'boxShadow':true,
   'borderRadius':true,
   'transition':true
 }
