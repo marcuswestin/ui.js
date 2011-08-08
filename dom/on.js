@@ -113,5 +113,5 @@ module.exports._normalizeEvent = function(eventName, e) {
 			: e.charCode
 	}
 
-	return e
+	return eventObj
 }
