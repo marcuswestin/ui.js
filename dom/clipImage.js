@@ -3,19 +3,28 @@ var style = require('./style'),
   getDocumentOf = require('./getDocumentOf'),
   waitForImage = require('./waitForImage')
 
-module.exports = function clipImage(src, clipWidth, clipHeight, win) {
+var defaultClipperStyles = {
+  width:100,
+  height:100,
+  overflow:'hidden'
+}
+
+module.exports = function clipImage(src, clipperStyles, win) {
+  clipperStyles = extend(clipperStyles, defaultClipperStyles)
   win = win || window
   var doc = win.document,
     clipper = doc.createElement('div'),
     img = doc.createElement('img')
   img.style.visibility = 'hidden'
   img.src = src
-  style(clipper, { width:clipWidth, height:clipHeight, overflow:'hidden' })
+  style(clipper, clipperStyles)
   doc.body.appendChild(clipper)
   clipper.appendChild(img)
   waitForImage(img, function() {
     var width = img.offsetWidth,
       height = img.offsetHeight,
+      clipWidth = clipperStyles.width,
+      clipHeight = clipperStyles.height,
       newSize
 
     if (width <= clipWidth && height <= clipHeight) {
