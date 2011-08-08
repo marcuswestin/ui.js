@@ -11,6 +11,7 @@ intended v0.1.1
 + implement dom.getViewportSize
 + implement dom.getWindowOf
 + Add getWidth, getHeight, hide and show to dom.Component
++ allow for opacity and graient to be passed in as a style property to NODEs
 
 v0.1.0
 + implement ui.dom
