@@ -4,13 +4,12 @@ var client = require('std/client'),
 var style = module.exports = function(element, styleProps) {
   var elStyle = element.style
   each(styleProps, function(val, key) {
-    if (typeof val == 'number') { val = val + 'px' }
-    
     if (key == 'float') { key = 'cssFloat' }
     else if (key == 'gradient') { return style.gradient.apply(style, [element].concat(val.split(' '))) }
     else if (key == 'opacity') { return style.opacity(element, val) }
     else if (style.prefixed[key]) { key = style.prefix + key }
     
+    if (typeof val == 'number') { val = val + 'px' }
     if (val != null) { elStyle[key] = val } // catches null and undefined
   })
   return element
