@@ -1,3 +1,6 @@
+v0.2.1
++ style.opacity improvement
+
 v0.2.0
 + Add dom.exposeGlobals()
 + Add a bunch more tags - P, H1-H4
