@@ -44,7 +44,7 @@ style.opacity = function(el, fraction) {
 style.gradient = function(el, fromColor, toColor) {
   var key = 'background',
     val
-  if (client.isIE && client.version <= 8) {
+  if (client.isIE) {
     key = 'filter'
     val = "progid:DXImageTransform.Microsoft.gradient(startColorstr='"+fromColor+"', endColorstr='"+toColor+"')"
   } else if (client.isFirefox) {
