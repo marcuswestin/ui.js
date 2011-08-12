@@ -1,3 +1,4 @@
 module.exports = function getWindowOf(element) {
-  return (element.ownerDocument || element).defaultView
+  var doc = (element.ownerDocument || element)
+  return ('defaultView' in doc ? doc.defaultView : doc.parentWindow)
 }
