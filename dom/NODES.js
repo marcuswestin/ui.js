@@ -73,12 +73,8 @@ NODES.NODE = Class(Component, function() {
   }
 
   this.append = function() {
-    if (this._el) {
-      this._processArgs(arguments, 0)
-    } else {
-      if (isArguments(this._args)) { this._args = slice(this._args) } // We delay the call to slice, since it may not be neccesary
-      this._args = this._args.concat(slice(arguments))
-    }
+    if (this._el) { this._processArgs(arguments, 0) }
+    else { this._args = this._args.concat(slice(arguments)) }
     return this
   }
 })
@@ -113,13 +109,13 @@ NODES.attributeHandlers = NODES.NODE.prototype.attributeHandlers
 
 NODES.createGenerator = function(tag) {
   var ClassDefinition = Class(NODES.NODE, function() { this._tag = tag })
-  return function() { return new ClassDefinition(arguments) }
+  return function() { return new ClassDefinition(slice(arguments, 0)) }
 }
 
 NODES.exposeGlobals = function() {
-  TEXT = function() { return new NODES.TEXT(arguments) }
-  FRAGMENT = function() { return new NODES.FRAGMENT(arguments) }
-  HTML = function() { return new NODES.HTML(arguments) }
+  TEXT = function() { return new NODES.TEXT(slice(arguments, 0)) }
+  FRAGMENT = function() { return new NODES.FRAGMENT(slice(arguments, 0)) }
+  HTML = function() { return new NODES.HTML(slice(arguments, 0)) }
   DIV = NODES.createGenerator('div')
   SPAN = NODES.createGenerator('span')
   IMG = NODES.createGenerator('img')
