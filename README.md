@@ -1,29 +1,20 @@
 ui.js
 =====
 
-A Javascript UI library
+Javascript UI
 
 ui/dom
 ------
 
-Module for rendering using dom
+Code for rendering UI using DOM
 
-ui/vector
----------
+ui/ios
+------
 
-Module for rendering using SVG/VML
+Code for rendering UI specifically for ios and touch events
 
-ui/canvas
----------
+ui/?
+----
 
-Module for rendering using canvas
+To be added, perhaps? e.g. **ui/vector** & **ui/canvas**
 
-ui/modules
----------------------------
-
-Implementation-agnostic UI models
-
-- List
-- Button
-- Tree
-- Accordion
