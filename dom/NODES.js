@@ -45,7 +45,11 @@ NODES.NODE = Class(Component, function() {
 			this._processArgs(args, 0)
 		}
 	}
-
+	
+	this.on = function(event, handler) {
+		Component.prototype.on.call(this, event, bind(this, handler))
+	}
+	
 	this._processArgs = function(args, index) {
 		while (index < args.length) {
 			this._processArg(args[index++])
