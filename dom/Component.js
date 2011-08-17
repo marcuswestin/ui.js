@@ -1,15 +1,15 @@
-var Class = require('std/Class')
-	, Publisher = require('std/Publisher')
-	, create = require('./create')
-	, style = require('./style')
-	, getOffset = require('./getOffset')
-	, on = require('./on')
-	, off = require('./off')
-	, addClass = require('./addClass')
-	, removeClass = require('./removeClass')
-	, getDocumentOf = require('./getDocumentOf')
-	, getElementOf = require('./getElementOf')
-	, getWindowOf = require('./getWindowOf')
+var Class = require('std/Class'),
+	Publisher = require('std/Publisher'),
+	create = require('./create'),
+	style = require('./style'),
+	getOffset = require('./getOffset'),
+	on = require('./on'),
+	off = require('./off'),
+	addClass = require('./addClass'),
+	removeClass = require('./removeClass'),
+	getDocumentOf = require('./getDocumentOf'),
+	getElementOf = require('./getElementOf'),
+	getWindowOf = require('./getWindowOf')
 
 module.exports = Class(Publisher, function() {
 
