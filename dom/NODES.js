@@ -6,7 +6,8 @@ var Class = require('std/Class')
 	Component = require('./Component'),
 	isArray = require('std/isArray')
 	arrayToObject = require('std/arrayToObject'),
-	curry = require('std/curry')
+	curry = require('std/curry'),
+	bind = require('std/bind')
 
 var NODES = module.exports
 
