@@ -1,4 +1,7 @@
-intended v0.1.1
+v0.2.3
++ style.opacity improvement
+
+v0.2.0
 + Add dom.exposeGlobals()
 + Add a bunch more tags - P, H1-H4
 + implement addClass and removeClass

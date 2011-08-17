@@ -41,16 +41,22 @@ style.opacity = function(el, fraction) {
   style.opacity(el, fraction)
 }
 
-style.gradient = function(el, fromColor, toColor) {
+style.counterPos = { 'top':'bottom', 'bottom':'top', 'left':'right', 'right':'left' }
+style.otherPos = { 'top':'left', 'bottom':'left', 'left':'top', 'right':'top' }
+style.gradient = function(el, fromColor, toColor, pos) {
+  pos = pos || 'top'
   var key = 'background',
     val
   if (client.isIE) {
     key = 'filter'
     val = "progid:DXImageTransform.Microsoft.gradient(startColorstr='"+fromColor+"', endColorstr='"+toColor+"')"
   } else if (client.isFirefox) {
-    val = '-moz-linear-gradient(top, '+fromColor+', '+toColor+')'
+    val = '-moz-linear-gradient('+pos+', '+fromColor+', '+toColor+')'
   } else if (client.isWebkit) {
-    val = '-webkit-gradient(linear, left top, left bottom, from('+fromColor+'), to('+toColor+'))'
+    var otherPos = style.otherPos[pos]
+	val = (otherPos == 'left')
+      ? '-webkit-gradient(linear, left '+pos+', left '+style.counterPos[pos]+', from('+fromColor+'), to('+toColor+'))'
+      : '-webkit-gradient(linear, '+pos+' '+otherPos+', '+style.counterPos[pos]+' '+otherPos+', from('+fromColor+'), to('+toColor+'))'
   } else {
     val = fromColor
   }
