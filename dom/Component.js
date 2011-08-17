@@ -7,6 +7,7 @@ var Class = require('std/Class'),
 	off = require('./off'),
 	addClass = require('./addClass'),
 	removeClass = require('./removeClass'),
+	hasClass = require('./hasClass'),
 	getDocumentOf = require('./getDocumentOf'),
 	getElementOf = require('./getElementOf'),
 	getWindowOf = require('./getWindowOf')
@@ -55,6 +56,7 @@ module.exports = Class(Publisher, function() {
 	this.addClass = function(className) { addClass(this._el, className); return this }
 	this.removeClass = function(className) { removeClass(this._el, className); return this }
 	this.toggleClass = function(className, shouldHave) { (shouldHave ? addClass : removeClass)(this._el, className); return this }
+	this.hasClass = function(className) { return hasClass(this._el, className) }
 	this.style = function(styles) { style(this._el, styles); return this }
 	this.opacity = function(opacity) { style.opacity(this._el, opacity); return this }
 

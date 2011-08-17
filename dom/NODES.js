@@ -50,7 +50,7 @@ NODES.NODE = Class(Component, function() {
 			this._processArgs(args, 0)
 		}
 	}
-	
+
 	this._processArgs = function(args, index) {
 		while (index < args.length) {
 			this._processArg(args[index++])
