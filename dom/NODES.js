@@ -17,6 +17,10 @@ NODES.NODE = Class(Component, function() {
 		this._args = args
 	}
 
+	this.on = function(event, handler) {
+		Component.prototype.on.call(this, event, bind(this, handler))
+	}
+
 	this.attributeHandlers = {
 		click: curry(this.on, 'click'),
 		mousedown: curry(this.on, 'mousedown'),
@@ -44,10 +48,6 @@ NODES.NODE = Class(Component, function() {
 		} else {
 			this._processArgs(args, 0)
 		}
-	}
-	
-	this.on = function(event, handler) {
-		Component.prototype.on.call(this, event, bind(this, handler))
 	}
 	
 	this._processArgs = function(args, index) {
