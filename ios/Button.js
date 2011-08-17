@@ -17,6 +17,7 @@ module.exports = Class(UIComponent, function() {
 				touchmove:bind(this, this._onTouchMove)
 			}, this._label)
 			// DIV({ style:{position:'absolute', top:0, left:'3.5%', width:'94%', 'borderRadius':8 } })
+			// http://admindaily.com/glossy-buttons-without-images-using-only-css3.html
 		)
 	}
 	
