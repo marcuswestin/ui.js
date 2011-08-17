@@ -26,31 +26,30 @@ module.exports = Class(Component, function() {
 	}
 	
 	this._onTouchStart = function(e) {
+		// TODO Don't listen to move, end or cancel until this happend
 		if (e.touches.length > 1) { return }
 		e.cancel()
 		var offset = this.getOffset()
-		this._touchRect = new Rect(offset.left, offset.top, offset.width, offset.height).pad(20)
+		this._touchRect = new Rect(offset.left, offset.top, offset.width, offset.height).pad(10)
 		this._button.addClass('active')
-		log('touch start ', this._box)
 	}
 	
 	this._onTouchMove = function(e) {
-		if (!this._box) { return }
+		if (!this._touchRect) { return }
 		var touch = e.touches[0]
 		if (this._touchRect.containsPoint({ x:touch.pageX, y:touch.pageY })) { this._button.addClass('active') }
 		else { this._button.removeClass('active') }
-		log('touch move ', ev.clientX, ev.clientY, ev.screenX, ev.screenY, ev.pageX, ev.pageY)
 	}
 	
 	this._onTouchEnd = function(e) { this._endTouch(e) }
 	this._onTouchCancel = function(e) { this._endTouch(e) }
-	this._endTouch = function() {
-		if (!this._box) { return }
+	this._endTouch = function(e) {
+		if (!this._touchRect) { return }
 		e.cancel()
-		delete this._box
+		delete this._touchRect
 		var shouldClick = this._button.hasClass('active')
 		this._button.removeClass('active')
-		log('touch end')
 		if (shouldClick) { this._clickHandler() }
+		// TODO deregister touch events
 	}
 })
