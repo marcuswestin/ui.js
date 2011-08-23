@@ -44,7 +44,13 @@ module.exports = Class(Publisher, function() {
 
 	this.create = function(tag, properties) { return create(tag, properties, this._doc) }
 
-	this.append = function(node) { this._el.appendChild(getElementOf(node.render ? node.render(this) : node)); return node }
+	this.append = function(/* node1, node2, ... */) {
+		for (var i=0; i<arguments.length; i++) {
+			var node = arguments[i]
+			this._el.appendChild(getElementOf(node.render ? node.render(this) : node))
+		}
+		return this
+	}
 	this.appendTo = function(node) { getElementOf(node).appendChild(this._render(node)); return this }
 
 	this.hide = function() { this._el.style.display = 'none'; return this }
