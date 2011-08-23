@@ -5,8 +5,9 @@ module.exports = Class(Component, function() {
 
 	this._class = 'Button'
 	
-	this.init = function(label, click) {
+	this.init = function(className, label, click) {
 		Component.prototype.init.apply(this)
+		if (className) { this._class += ' ' + className }
 		this._label = label
 		this._clickHandler = click
 	}
