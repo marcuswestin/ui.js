@@ -1,4 +1,5 @@
-var Component = require('../dom/Component'),
+var Class = require('std/Class'),
+	Component = require('../dom/Component'),
 	Rect = require('std/math/Rect')
 
 module.exports = Class(Component, function() {

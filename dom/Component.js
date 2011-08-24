@@ -56,8 +56,8 @@ module.exports = Class(Publisher, function() {
 	this.hide = function() { this._el.style.display = 'none'; return this }
 	this.show = function() { this._el.style.display = 'block'; return this }
 	
-	this.on = function(eventName, handler) { return on(this._el, eventName, handler) }
-	this.off = function(eventName, handler) { return off(this._el, eventName, handler) }
+	this.on = function(eventName, handler) { on(this._el, eventName, handler); return this }
+	this.off = function(eventName, handler) { off(this._el, eventName, handler); return this }
 
 	this.addClass = function(className) { addClass(this._el, className); return this }
 	this.removeClass = function(className) { removeClass(this._el, className); return this }

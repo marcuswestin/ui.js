@@ -19,7 +19,7 @@ NODES.NODE = Class(Component, function() {
 	}
 
 	this.on = function(event, handler) {
-		Component.prototype.on.call(this, event, bind(this, handler))
+		return Component.prototype.on.call(this, event, bind(this, handler))
 	}
 
 	this.attributeHandlers = {
