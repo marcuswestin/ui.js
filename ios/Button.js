@@ -19,7 +19,12 @@ module.exports = Class(Component, function() {
 			.on('touchend', bind(this, this._onTouchEnd))
 			.on('touchcancel', bind(this, this._onTouchCancel))
 			.on('touchmove', bind(this, this._onTouchMove))
-			.on('click', this._clickHandler) // for browser development
+			
+			// for browser development
+			.on('click', this._clickHandler)
+			.on('mousedown', bind(this, this.addClass, 'active'))
+			.on('mouseup', bind(this, this.removeClass, 'active'))
+			.on('mouseout', bind(this, this.removeClass, 'active'))
 		
 		this.append(SPAN('label', this._label))
 
