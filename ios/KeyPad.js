@@ -33,6 +33,7 @@ module.exports = Class(Component, function() {
 			if (i % 3 == 0) { className += ' left' }
 			if (i < 3) { className += ' top' }
 			if ((i - 1) % 3 == 0) { className += ' center' }
+			if ((i + 1) % 3 == 0) { className += ' right' }
 			this._keysEl.append(new Button(className, key, bind(this, this._onKeyPress, key)))
 		})
 		
