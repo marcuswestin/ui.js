@@ -13,7 +13,7 @@ module.exports = Class(Component, function() {
 			1, 2, 3,
 			4, 5, 6,
 			7, 8, 9,
-			'.',0,'<']
+			'00',0,'<']
 	}
 	
 	this.renderContent = function() {
@@ -36,6 +36,7 @@ module.exports = Class(Component, function() {
 	this._onKeyPress = function(key) {
 		if (key == 0 && !this._digits.length) { /* do nothing */ }
 		else if (typeof key == 'number') { this._digits.push(key) }
+		else if (key == '00') { this._digits.push(0); this._digits.push(0) }
 		else if (key == '<') { this._digits.pop() }
 		this._renderValue()
 	}
