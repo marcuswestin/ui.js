@@ -16,6 +16,12 @@ module.exports = Class(Component, function() {
 			'00',0,'<']
 	}
 	
+	this.clear = function() {
+		this._digits = []
+		if (this._el) { this._renderValue() }
+		return this
+	}
+	
 	this.renderContent = function() {
 		this.append(
 			DIV('output', this._valueEl = DIV('value')),
