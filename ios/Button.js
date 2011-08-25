@@ -26,7 +26,7 @@ module.exports = Class(Component, function() {
 			.on('mouseup', bind(this, this.removeClass, 'active'))
 			.on('mouseout', bind(this, this.removeClass, 'active'))
 		
-		this.append(SPAN('label', this._label))
+		this.append(SPAN('label', HTML(this._label)))
 
 		// DIV({ style:{position:'absolute', top:0, left:'3.5%', width:'94%', 'borderRadius':8 } })
 		// http://admindaily.com/glossy-buttons-without-images-using-only-css3.html
