@@ -18,12 +18,16 @@ module.exports = Class(Component, function() {
 	
 	this.renderContent = function() {
 		this.append(
-			this._valueEl = DIV('value'),
+			DIV('output', this._valueEl = DIV('value')),
 			this._keysEl = DIV('keys')
 		)
 		
-		each(this._keys, this, function(key) {
-			this._keysEl.append(new Button('key', key, bind(this, this._onKeyPress, key)))
+		each(this._keys, this, function(key, i) {
+			var className = 'key'
+			if (i % 3 == 0) { className += ' left' }
+			if (i < 3) { className += ' top' }
+			if ((i - 1) % 3 == 0) { className += ' center' }
+			this._keysEl.append(new Button(className, key, bind(this, this._onKeyPress, key)))
 		})
 		
 		this._renderValue()
