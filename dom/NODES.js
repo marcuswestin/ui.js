@@ -58,7 +58,7 @@ NODES.NODE = Class(Component, function() {
 	}
 
 	this._processArg = function(arg) {
-		if (!arg) { return }
+		if (arg == null) { return } // catches both null and undefined, but lets through '' and 0
 		var node = this._el
 		, doc = this._doc
 		if (typeof arg._render == 'function') {
