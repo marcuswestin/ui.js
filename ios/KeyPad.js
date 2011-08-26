@@ -22,6 +22,10 @@ module.exports = Class(Component, function() {
 		return this
 	}
 	
+	this.getValue = function() {
+		return parseFloat(this._getValueString(), 10)
+	}
+	
 	this.renderContent = function() {
 		this.append(
 			DIV('output', this._valueEl = DIV('value')),
@@ -49,6 +53,10 @@ module.exports = Class(Component, function() {
 	}
 	
 	this._renderValue = function() {
+		this._valueEl.getElement().innerHTML = '$' + this._getValueString()
+	}
+	
+	this._getValueString = function() {
 		var digitsCopy = slice(this._digits)
 		if (digitsCopy.length == 0) { digitsCopy = [0,0,0] }
 		if (digitsCopy.length == 1) { digitsCopy = [0,0,digitsCopy[0]] }
@@ -57,7 +65,7 @@ module.exports = Class(Component, function() {
 
 		if (digitsCopy.length < 4) { digitsCopy.unshift(0) }
 		if (digitsCopy.length < 4) { digitsCopy.unshift(0) }
-		this._valueEl.getElement().innerHTML = '$' + digitsCopy.join('')
+		return digitsCopy.join('')
 	}
 	
 })
