@@ -27,15 +27,24 @@ module.exports = Class(Component, function() {
 			.on('mouseout', bind(this, this.removeClass, 'active'))
 		
 		this.append(SPAN('label', HTML(this._label)))
+		
+		if (this._disabled) { this.addClass('disabled') }
 
 		// DIV({ style:{position:'absolute', top:0, left:'3.5%', width:'94%', 'borderRadius':8 } })
 		// http://admindaily.com/glossy-buttons-without-images-using-only-css3.html
+	}
+	
+	this.disable = function(flag) {
+		this._disabled = (flag !== false)
+		if (this._el) { this.toggleClass('disabled', this._disabled) }
+		return this
 	}
 	
 	this._onTouchStart = function(e) {
 		// TODO Don't listen to move, end or cancel until this happend
 		if (e.touches.length > 1) { return }
 		e.cancel()
+		if (this._disabled) { return }
 		var offset = this.getOffset()
 		this._touchRect = new Rect(offset.left, offset.top, offset.width, offset.height).pad(10)
 		this.addClass('active')
