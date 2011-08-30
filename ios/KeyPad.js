@@ -45,7 +45,10 @@ module.exports = Class(Component, function() {
 		this._renderValue()
 	}
 
-	this._renderValue = function() { this._valueEl.getElement().innerHTML = this._getFormattedValue() }
+	this._renderValue = function() {
+		this._valueEl.getElement().innerHTML = this._getFormattedValue()
+		this._valueEl.toggleClass('empty', !this._input.length)
+	}
 	
 	/* Overwrite these for custom behavior
 	 *************************************/
